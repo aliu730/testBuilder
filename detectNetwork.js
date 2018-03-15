@@ -30,8 +30,8 @@ var detectNetwork = function(cardNumber) {
   for (var i = 622126; i <= 622926; i++) {
     chinaPre.push(i);
   }
-  var chinaPre = chinaPre.concat([624,625,626]);
-  var chinaPre = chinaPre.concat([6282, 6283, 6284, 6285, 6286, 6287, 6288]);
+  var chinaPre2 = ['624','625','626'];
+  var chinaPre3 = ['6282', '6283', '6284', '6285', '6286', '6287', '6288'];
   var chinaPre = JSON.stringify(chinaPre);
   var switchPre = ['4903', '4905', '4911', '4936', '564182', '633110', '6333', '6759'];
   var discLength = [16, 19];
@@ -42,21 +42,21 @@ var detectNetwork = function(cardNumber) {
     return "Diner's Club";
   } else if (amerPre.includes(cardNumber.slice(0,2)) && (cardNumber.length === 15)) {
     return "American Express";
-  } else if (visaPre.includes(cardNumber[0]) && visaLength.includes(cardNumber.length)) {
-    return "Visa";
   } else if (masterPre.includes(cardNumber.slice(0,2)) && (cardNumber.length === 16)) {
     return "MasterCard";
   } else if ((discPre.includes(firstTwo) || discPre.includes(firstThree) || discPre.includes(firstFour)) && discLength.includes(cardNumber.length)) {
     return 'Discover';
   } else if (maePre.includes(firstFour) && maeLength.includes(cardNumber.length)) {
     return "Maestro";
-  } else if ((chinaPre.includes(firstSix) || chinaPre.includes(firstThree) || chinaPre.includes(firstFour)) && chinaLength.includes(cardNumber.length)) {
+  } else if ((chinaPre.includes(firstSix) || chinaPre2.includes(firstThree) || chinaPre3.includes(firstFour)) && chinaLength.includes(cardNumber.length)) {
     return "China UnionPay";
   } else if ((switchPre.includes(firstFour) || switchPre.includes(firstSix)) && (switchLength.includes(cardNumber.length))) {
     return "Switch";
+  } else if (visaPre.includes(cardNumber[0]) && visaLength.includes(cardNumber.length)) {
+    return "Visa";
   }
-  //China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 and a length of 16-19.
-  //Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19.
+  // China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 and a length of 16-19.
+  // Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19.
 };
 
 
